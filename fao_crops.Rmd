@@ -1,0 +1,105 @@
+---
+title: "FAO Crops Data 1961-2007"
+author: "Md. Tanvir Rahman"
+date: "2024-09-22"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+
+
+# import packages
+library(dplyr)
+library(tidyverse)
+
+
+#import data of csv files in R programming
+getwd() #fuction to know the current working directory(WD)
+setwd("D:\\faodata")#function to reset the current WD
+
+
+#import csv files
+faocrops <-read.csv("fao_data_crops.csv") 
+
+
+# Data Explore
+
+View(faocrops)
+colnames(faocrops)
+
+
+
+# Get unique country or area of the 'country_or_area' column
+unique_country_or_area <- unique(faocrops$country_or_area)
+# Remove empty string entries
+unique_country_or_area <- unique_country_or_area[unique_country_or_area != ""]
+# Print the filtered unique elements
+#There are 259 unique elements in the country_or_area column
+head(unique_country_or_area)
+tail(unique_country_or_area)
+
+
+
+
+# Get unique elements of the 'element' column
+unique_element <- unique(faocrops$element)
+# Remove empty string entries
+unique_element <- unique_element[unique_element != ""]
+# Print the filtered unique elements
+print(unique_element) # There are 10 unique elements in the element column
+
+
+
+
+# Get unique element code of the 'element_code' column
+unique_element_code <- unique(faocrops$element_code)
+print(unique_element_code) # There are some unwanted elements in the unique elements code
+# Define the elements to be removed
+elements_to_remove <- c("Footnote", "Calculated Data", "May include official, semi-official or estimated data", 
+                        "Not reported by country", "FAO Estimate", "Unofficial figure")
+# Remove the specified elements
+unique_element_code <- setdiff(unique_element_code, elements_to_remove)
+
+# Print the filtered unique elements
+print(unique_element_code)
+
+
+
+
+
+# Get unique elements of the 'year' column
+unique_year <- unique(faocrops$year)
+# Remove NA values
+unique_year <- unique_year[!is.na(unique_year)]
+# Print the filtered unique elements
+print(unique_year)
+# Print the filtered unique elements
+print(unique_year)
+head(unique_year)
+tail(unique_year)
+# The dataset contain information of 1961-2007
+
+
+
+# Get unique elements of the 'unit' column
+unique_unit <- unique(faocrops$unit)
+# Remove NA values
+unique_unit <- unique_unit[unique_unit != ""]
+# Print the filtered unique elements
+print(unique_unit) # There are 5 unique elements in the elements column
+
+
+
+# Get unique elements of the 'category' column
+unique_category <- unique(faocrops$category) # There are 172 unique elements in the category column
+
+head(unique_category)
+tail(unique_category)
+```
+
+
+
+
+
